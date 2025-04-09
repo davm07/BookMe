@@ -1,0 +1,113 @@
+:root {
+  --bg-color: #f2efe7;
+  --fg-color: #443627;
+  --card-color: #443627;
+}
+
+.genres-container {
+  max-width: 62rem;
+}
+
+.custom-title {
+  color: var(--fg-color);
+}
+
+.custom-paragraph {
+  color: var(--fg-color);
+}
+
+.body-section {
+  background-color: var(--bg-color);
+}
+
+.custom-card {
+  background-color: var(--card-color);
+  max-width: 18rem;
+  margin: 0 auto;
+  border: 0px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.col.custom-col {
+  padding: 0;
+}
+
+.custom-card .card-title {
+  color: var(--bg-color);
+}
+
+.card-img-top {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.custom-btn {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+
+  &:hover {
+    background-color: transparent;
+    border: var(--bg-color) solid 1px;
+    color: var(--bg-color);
+  }
+}
+
+.search-bar {
+  margin: 1.5rem 0;
+  max-width: 62rem;
+}
+
+.search-bar .form-label {
+  color: var(--fg-color);
+}
+
+.search-bar .form-control {
+  color: var(--fg-color);
+  border: var(--card-color) solid 2px;
+}
+
+.search-btn {
+  background-color: var(--card-color);
+  color: var(--bg-color);
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: transparent;
+    border: var(--card-color) solid 1px;
+    color: var(--card-color);
+  }
+}
+
+.results-list {
+  max-width: 62rem;
+}
+
+.cover-img {
+  min-width: 80px;
+}
+
+table > * > tr > .table-text {
+  color: var(--fg-color);
+  background-color: transparent;
+}
+
+.table-text.max-width-text {
+  max-width: 150px;
+}
+
+.pagination .page-item .page-link {
+  color: var(--bg-color);
+  background-color: var(--card-color);
+  border: var(--card-color) solid 1px;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  border: var(--card-color) solid 1px;
+}

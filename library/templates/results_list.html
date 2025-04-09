@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% block title %} Results for: {{ title }}{%endblock%}
+{% block content %}
+<a href="/" class="btn btn-primary mb-4">Back to Home</a>
+<h1 class="custom-title">Results for: {{ title }}</h1>
+
+{% include 'partials/search_bar.html' %}
+{% if books %}
+<div class="results-list">
+  <div class="table-responsive mt-4 mb-4">
+    <table class="table table-striped info-table">
+      <thead>
+        <tr>
+          <th scope="col" class="table-text">Title</th>
+          <th scope="col" class="table-text">Author</th>
+          <th scope="col" class="table-text">Published</th>
+          <th scope="col" class="table-text">Book cover</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <td class="table-text align-middle max-width-text">{{ book.title }}</td>
+          <td class="table-text align-middle max-width-text">
+            {% if book.author_name %}
+             {{ book.author_name|join:", " }}
+            {% else %}
+             Unknown
+            {% endif %}
+          </td>
+          <td class="table-text align-middle text-center">
+            {{ book.first_publish_year|default:"Unknown" }}
+          </td>
+          <td class="table-text">
+            <div class="container p-2">
+              {% if book.cover_i %}
+
+              <img
+                src="https://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
+                height="150"
+                width="100"
+                class="img-fluid m-auto cover-img"
+                alt="Cover of{{ book.title }}"
+                loading="lazy"
+              />
+              {% else %}
+              <p>No cover available 😔</p>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+<nav>
+  <ul class="pagination justify-content-center">
+    {% if page > 1 %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?search={{query}}&limit={{limit}}&page=1"
+        aria-label="First">
+        &laquo; First</a>
+    </li>
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?search={{query}}&limit={{limit}}&page={{ page|add:"-1" }}"
+        aria-label="Previous"
+      >
+        &lsaquo; Prev</a
+      >
+    </li>
+    {% endif %}
+
+    <li class="page-item active" aria-current="page {{ page }}">
+      <span class="page-link">{{page}} of {{total_pages}}</span>
+    </li>
+
+    {% if page < total_pages %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?search={{query}}&limit={{limit}}&page={{ page|add:"1" }}"
+        aria-label="Next">
+        Next &rsaquo;</a>
+    </li>
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?search={{query}}&limit={{limit}}&page={{ total_pages}}"
+        aria-label="Last"
+      >
+      Last &raquo;</a
+      >
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+</div>
+{% else %}
+<p>No results found</p>
+{% endif %} {% endblock %}
