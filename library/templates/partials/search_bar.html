@@ -12,6 +12,7 @@
       class="form-control custom-input"
       placeholder="Search by title, author or genre"
       aria-label="Search"
+      value="{% if request.GET.search %}{{ request.GET.search }}{% elif request.GET.genre %}{{ request.GET.genre }}{% else %}Jesus Christ{% endif %}"
     />
     <input type="hidden" name="limit" value="10" />
     <input type="hidden" name="page" value="1" />

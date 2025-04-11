@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block content %}
+<a href="/" class="btn btn-home mb-4">&larr; Back to Home</a>
+<h1 class="custom-title">{{book.volumeInfo.title}} details</h1>
+
+<section class="container details-section">
+  <div class="text-center">
+    <img
+      src="{{ book.volumeInfo.imageLinks.thumbnail }}"
+      height="200"
+      width="150"
+      class="img-fluid book-cover-img mx-auto d-block"
+      alt="Cover of {{ book.volumeInfo.title }}"
+      loading="lazy"
+    />
+  </div>
+  <div>
+    <p class="text-custom">
+      <b>Author:</b> {{ book.volumeInfo.authors|join:", " }}
+    </p>
+    <p class="text-custom">
+      <b>Published:</b> {{ book.volumeInfo.publishedDate }}
+    </p>
+    <p class="text-custom">
+      <b>Genre:</b>
+      {%if book.volumeInfo.categories%}{{book.volumeInfo.categories|join:", " }}
+      {%else %}Unknown{% endif %}
+    </p>
+    {% load tags_filter %}
+    <p class="text-custom">
+      <b>Description:</b>
+      {{book.volumeInfo.description|filter_tags|truncatewords:50 }}
+    </p>
+    <p class="text-custom"><b>Pages:</b> {{ book.volumeInfo.pageCount }}</p>
+  </div>
+</section>
+{% endblock %}

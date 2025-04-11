@@ -8,6 +8,10 @@
   max-width: 62rem;
 }
 
+.text-custom {
+  color: var(--fg-color);
+}
+
 .custom-title {
   color: var(--fg-color);
 }
@@ -84,6 +88,7 @@
 }
 
 .results-list {
+  width: fit-content;
   max-width: 62rem;
 }
 
@@ -96,8 +101,17 @@ table > * > tr > .table-text {
   background-color: transparent;
 }
 
+a.custom-link {
+  color: var(--fg-color);
+  transition: all 0.3s ease;
+}
+
+a.custom-link:hover {
+  font-weight: bold;
+}
+
 .table-text.max-width-text {
-  max-width: 150px;
+  width: 12.4rem;
 }
 
 .pagination .page-item .page-link {
@@ -110,4 +124,22 @@ table > * > tr > .table-text {
   background-color: var(--bg-color);
   color: var(--fg-color);
   border: var(--card-color) solid 1px;
+}
+.btn-home {
+  background-color: var(--card-color);
+  color: var(--bg-color);
+
+  &:hover {
+    background-color: transparent;
+    border: var(--card-color) solid 1px;
+    color: var(--card-color);
+  }
+}
+
+.container.details-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 800px !important;
+  margin: 3rem 0 0 0;
 }

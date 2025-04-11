@@ -1,10 +1,10 @@
-{% extends "base.html" %} {% block title %} Results for: {{ title }}{%endblock%}
+{% extends "base.html" %} {% block title %} - Results for: {{ title }}{%endblock%}
 {% block content %}
-<a href="/" class="btn btn-primary mb-4">Back to Home</a>
+<a href="/" class="btn btn-home mb-4">&larr; Back to Home</a>
 <h1 class="custom-title">Results for: {{ title }}</h1>
 
 {% include 'partials/search_bar.html' %}
-{% if books %}
+{% if books|length > 0%}
 <div class="results-list">
   <div class="table-responsive mt-4 mb-4">
     <table class="table table-striped info-table">
@@ -12,6 +12,7 @@
         <tr>
           <th scope="col" class="table-text">Title</th>
           <th scope="col" class="table-text">Author</th>
+          <th scope="col" class="table-text">Genre/Category</th>
           <th scope="col" class="table-text">Published</th>
           <th scope="col" class="table-text">Book cover</th>
         </tr>
@@ -19,23 +20,35 @@
       <tbody>
         {% for book in books %}
         <tr>
-          <td class="table-text align-middle max-width-text">{{ book.title }}</td>
-          <td class="table-text align-middle max-width-text">
-            {% if book.author_name %}
-             {{ book.author_name|join:", " }}
-            {% else %}
-             Unknown
-            {% endif %}
+          <td class="table-text align-middle max-width-text" title="Go to book {{ book.voluneInfo.title }}">
+            <div>
+              <p class="fw-bold">{{ book.volumeInfo.title }}</p>
+              <a href="{% url 'book_detail' book.id %}" class="custom-link">See book details &#8599;</a>
+            </div>
           </td>
-          <td class="table-text align-middle text-center">
-            {{ book.first_publish_year|default:"Unknown" }}
+          <td class="table-text align-middle max-width-text">
+              {% if book.volumeInfo.authors %}
+               {{ book.volumeInfo.authors|join:", " }}
+              {% else %}
+               Unknown
+              {% endif %}
+          </td>
+          <td class="table-text align-middle max-width-text">
+            {% if book.volumeInfo.categories %}
+               {{ book.volumeInfo.categories|join:", " }}
+              {% else %}
+               Unknown
+              {% endif %}
+          </td>
+          <td class="table-text align-middle max-width-text">
+            {{ book.volumeInfo.publishedDate|default:"Unknown" }}
           </td>
           <td class="table-text">
             <div class="container p-2">
-              {% if book.cover_i %}
+              {% if book.volumeInfo.imageLinks.thumbnail %}
 
               <img
-                src="https://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
+                src="{{ book.volumeInfo.imageLinks.thumbnail }}"
                 height="150"
                 width="100"
                 class="img-fluid m-auto cover-img"
@@ -99,5 +112,5 @@
 </nav>
 </div>
 {% else %}
-<p>No results found</p>
+<p class="text-custom">No results found</p>
 {% endif %} {% endblock %}
