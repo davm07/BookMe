@@ -24,7 +24,7 @@
       <tbody>
         {% for book in books %}
         <tr>
-          <td class="table-text align-middle max-width-text" title="Go to book {{ book.voluneInfo.title }}">
+          <td class="table-text align-middle max-width-text" title="Go to book {{ book.volumeInfo.title }}">
             <div>
               <p class="fw-bold">{{ book.volumeInfo.title }}</p>
               <a href="{% url 'book_detail' book.id %}" class="custom-link">See book details &#8599;</a>
@@ -68,52 +68,52 @@
         {% endfor %}
       </tbody>
     </table>
+    <nav>
+      <ul class="pagination justify-content-center">
+        {% if page > 1 %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?search={{query}}&limit={{limit}}&page=1"
+            aria-label="First">
+            &laquo; First</a>
+        </li>
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?search={{query}}&limit={{limit}}&page={{ page|add:"-1" }}"
+            aria-label="Previous"
+          >
+            &lsaquo; Prev</a
+          >
+        </li>
+        {% endif %}
+
+        <li class="page-item active" aria-current="page {{ page }}">
+          <span class="page-link">{{page}} of {{total_pages}}</span>
+        </li>
+
+        {% if page < total_pages %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?search={{query}}&limit={{limit}}&page={{ page|add:"1" }}"
+            aria-label="Next">
+            Next &rsaquo;</a>
+        </li>
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?search={{query}}&limit={{limit}}&page={{ total_pages}}"
+            aria-label="Last"
+          >
+          Last &raquo;</a
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
   </div>
-<nav>
-  <ul class="pagination justify-content-center">
-    {% if page > 1 %}
-    <li class="page-item">
-      <a
-        class="page-link"
-        href="?search={{query}}&limit={{limit}}&page=1"
-        aria-label="First">
-        &laquo; First</a>
-    </li>
-    <li class="page-item">
-      <a
-        class="page-link"
-        href="?search={{query}}&limit={{limit}}&page={{ page|add:"-1" }}"
-        aria-label="Previous"
-      >
-        &lsaquo; Prev</a
-      >
-    </li>
-    {% endif %}
-
-    <li class="page-item active" aria-current="page {{ page }}">
-      <span class="page-link">{{page}} of {{total_pages}}</span>
-    </li>
-
-    {% if page < total_pages %}
-    <li class="page-item">
-      <a
-        class="page-link"
-        href="?search={{query}}&limit={{limit}}&page={{ page|add:"1" }}"
-        aria-label="Next">
-        Next &rsaquo;</a>
-    </li>
-    <li class="page-item">
-      <a
-        class="page-link"
-        href="?search={{query}}&limit={{limit}}&page={{ total_pages}}"
-        aria-label="Last"
-      >
-      Last &raquo;</a
-      >
-    </li>
-    {% endif %}
-  </ul>
-</nav>
 </div>
 {% else %}
 <p class="text-custom">No results found</p>

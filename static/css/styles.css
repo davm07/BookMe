@@ -89,7 +89,7 @@
 }
 
 .results-list {
-  width: fit-content;
+  width: 100%;
   max-width: 62rem;
 }
 
@@ -112,7 +112,10 @@ a.custom-link:hover {
 }
 
 .table-text.max-width-text {
-  width: 12.4rem;
+  max-width: 12.4rem;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pagination .page-item .page-link {
@@ -201,13 +204,14 @@ a.custom-link:hover {
 }
 
 .favorite-books {
-  display: flex;
   max-width: 62rem;
-  flex-direction: row;
   margin-top: 1.5rem;
-  gap: 1.5rem;
+  column-count: 3;
+  column-gap: 1.5rem;
 
   .favorite-book {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
     display: flex;
     max-width: 20rem;
     width: 100%;
@@ -237,5 +241,17 @@ a.custom-link:hover {
         color: var(--fg-color);
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .favorite-books {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 576px) {
+  .favorite-books {
+    column-count: 1;
   }
 }

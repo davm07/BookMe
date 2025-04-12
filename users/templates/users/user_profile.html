@@ -10,7 +10,11 @@
     <div class="favorite-books">
         {% for book in my_books %}
         <div class="favorite-book">
+            {% if book.volumeInfo.title %}
             <h2>{{book.volumeInfo.title|truncatewords:10}}</h2>
+            {% else %}
+            <h2>Unknown title</h2>
+            {% endif %}
             {% if book.volumeInfo.authors %}
             <p><b>Author(s):</b> {{book.volumeInfo.authors|join:", " }}</p>
             {% else %}

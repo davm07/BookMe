@@ -29,13 +29,24 @@
         </button>
       </form>
       {% else %}
-      <p>You need to login to add a book to your favorites</p>
+      <p class="text-custom fw-bold">You need to login to add a book to your favorites</p>
       {% endif %}
+      {% if book.volumeInfo.authors %}
       <p class="text-custom">
         <b>Author:</b> {{ book.volumeInfo.authors|join:", " }}
       </p>
+      {% else %}
       <p class="text-custom">
-        <b>Published:</b> {{ book.volumeInfo.publishedDate }}
+        <b>Author:</b> Unknown
+      </p>
+      {% endif %}
+      <p class="text-custom">
+        <b>Published:</b>
+        {% if book.volumeInfo.publishedDate %}
+        {{ book.volumeInfo.publishedDate }}
+        {% else %}
+        Unknown
+        {% endif %}
       </p>
       <p class="text-custom">
         <b>Genre:</b>
@@ -52,7 +63,13 @@
         No description available
         {% endif %}
       </p>
-      <p class="text-custom"><b>Pages:</b> {{ book.volumeInfo.pageCount }}</p>
+      <p class="text-custom"><b>Pages:</b>
+        {% if book.volumeInfo.pageCount %}
+        {{ book.volumeInfo.pageCount }}
+        {% else %}
+        Unknown
+        {% endif %}
+      </p>
     </div>
   </section>
 </div>
