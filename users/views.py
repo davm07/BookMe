@@ -15,7 +15,7 @@ def register_user(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             login(request, form.save())
-            return redirect("/")
+            return redirect("users:user_profile")
     else:
         form = UserCreationForm()
     return render(request, "users/register.html", {"form": form})
