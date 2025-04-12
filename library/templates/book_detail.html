@@ -3,6 +3,8 @@
   <h1 class="custom-title">{{book.volumeInfo.title}} details</h1>
   <section class="container details-section">
     <div class="text-center">
+      {% if book.volumeInfo.imageLinks.thumbnail %}
+      <!-- If the book has an image, show it. Otherwise, show a meesage saying that the book has no image. -->
       <img
         src="{{ book.volumeInfo.imageLinks.thumbnail }}"
         height="200"
@@ -11,8 +13,12 @@
         alt="Cover of {{ book.volumeInfo.title }}"
         loading="lazy"
       />
+      {% else %}
+      <p class="text-custom">No cover available</p>
+      {% endif %}
     </div>
     <div>
+      <!-- This If statement checks if the user is authenticated and if the book is in the user's favorites. If so it shows a message saying that the book is already in the user's favorites. If not, it shows a button to add the book to the user's favorites. If the user is not authenticated, it shows a message saying that the user needs to login to add a book to their favorites. -->
       {% if user.is_authenticated and is_favorite %}
       <p class="fw-bold text-custom">Book is already in your favorites</p>
       {% elif user.is_authenticated %}
@@ -37,6 +43,7 @@
         {%else %}Unknown{% endif %}
       </p>
       {% load tags_filter %}
+      <!-- I use the filter_tags filter to remove HTML tags from the description. The truncatewords filter truncates the description to 50 words. -->
       <p class="text-custom">
         <b>Description:</b>
         {% if book.volumeInfo.description %}

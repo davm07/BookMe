@@ -4,6 +4,7 @@
     method="get"
     class="d-flex align-items-center gap-2"
   >
+    <!-- Search bar for books. It searches by title, author or genre -->
     <label for="search" class="form-label visually-hidden">Search</label>
     <input
       type="text"
@@ -14,6 +15,8 @@
       aria-label="Search"
       value="{% if request.GET.search %}{{ request.GET.search }}{% elif request.GET.genre %}{{ request.GET.genre }}{% else %}Jesus Christ{% endif %}"
     />
+
+    <!-- Hidden values to control pagination and results limit -->
     <input type="hidden" name="limit" value="10" />
     <input type="hidden" name="page" value="1" />
     <button type="submit" class="btn search-btn m-0">Search</button>

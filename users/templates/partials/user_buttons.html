@@ -1,3 +1,5 @@
+<!-- This template is used to display user buttons in the header of the website. -->
+<!-- It includes buttons for login, logout, profile, and back to search home. Some If statements are used to check if the user is authenticated and if they are on the search home page. If they are, the profile button is not displayed. If they are not, the profile button is displayed. -->
 <div class="d-flex flex-row-reverse gap-3 user-buttons align-items-center">
   {% if user.is_authenticated%}
     <form action="{% url 'users:logout_user' %}" method="post">

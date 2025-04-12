@@ -7,9 +7,22 @@ from .models import FavoriteBook
 from django.http import HttpResponseRedirect
 
 def books_search(request):
+    """
+    This function handles the books search page.
+    It renders the books_search.html template and passes the request object to it.
+    The view is the main entry point for the books search functionality.
+    It showcases the search bar abd some static genres to search by.
+    """
     return render(request, 'books_search.html')
 
 def books_search_results(request):
+    """
+    This function handles the books search results page.
+    It renders the results_list.html template and passes the request object to it.
+    The view is the main entry point for the books search results functionality.
+    It fetches the search query, limit, and page from the request object and uses them to fetch the books.
+    It also calculates the total number of pages and passes them to the template.
+    """
     search_query = request.GET.get('search')
     genre_query = request.GET.get('genre')
     limit = int(request.GET.get('limit', 10))
@@ -39,6 +52,16 @@ def books_search_results(request):
     return render(request, 'results_list.html', context)
 
 def book_detail(request, book_id):
+    """
+    This function handles the book detail page.
+    It renders the book_detail.html template and passes the request object to it.
+    The view is the main entry point for the book detail functionality.
+    It fetches the book details from the Google Books API and passes them to the template.
+    It also checks if the user is authenticated and if the book is in the user's favorites.
+    If so, it shows a message saying that the book is already in the user's favorites.
+    If not, it shows a button to add the book to the user's favorites.
+    If the user is not authenticated, it shows a message saying that the user needs to login to add a book to their favorites.
+    """
     is_favorite = False
     if request.user.is_authenticated:
         is_favorite = FavoriteBook.objects.filter(user=request.user, book_id=book_id).exists()
@@ -47,6 +70,12 @@ def book_detail(request, book_id):
 
 @login_required(login_url='/users/login/')
 def add_book_to_favorites(request, book_id):
+    """
+    This function handles the add book to favorites functionality.
+    It checks if the user is authenticated and if the book is not already in the user's favorites.
+    If so, it creates a new FavoriteBook object and redirects the user to the book detail page.
+    If not, it redirects the user to the book detail page.
+    """
     if request.method == 'POST':
         if not FavoriteBook.objects.filter(user=request.user, book_id=book_id).exists():
             FavoriteBook.objects.create(user=request.user, book_id=book_id)

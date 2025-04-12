@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
 <section class="mt-4">
   <h1 class="custom-title">Books List</h1>
   <p class="custom-paragraph">
@@ -6,8 +8,10 @@
     just type in the search bar and click on search
   </p>
 
+  <!-- This is the search bar. It searches by title, author or genre -->
   {% include 'partials/search_bar.html' %}
 
+  <!-- This genre list shows some static genres to search by. It is not dynamic, so it will not change when the user searches. It is just for the user to choose from. If the user selects one, it will take them to the search results page with the selected genre -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 genres-container">
     <div class="col custom-col">
       <div class="card custom-card">
@@ -15,7 +19,7 @@
         <img
           src="{% static 'images/mystery.webp' %}"
           class="card-img-top img-fluid"
-          alt="..."
+          alt="Mystery genre"
         />
         <div class="card-body">
           <h5 class="card-title">Mystery</h5>
@@ -33,7 +37,7 @@
         <img
           src="{% static 'images/fiction.webp' %}"
           class="card-img-top img-fluid"
-          alt="..."
+          alt="Fiction genre"
         />
         <div class="card-body">
           <h5 class="card-title">Fiction</h5>
@@ -51,7 +55,7 @@
         <img
           src="{% static 'images/fantasy.webp' %}"
           class="card-img-top img-fluid"
-          alt="..."
+          alt="Fantasy genre"
         />
         <div class="card-body">
           <h5 class="card-title">Fantasy</h5>
@@ -69,7 +73,7 @@
         <img
           src="{% static 'images/science.webp' %}"
           class="card-img-top img-fluid"
-          alt="..."
+          alt="Science fiction genre"
         />
         <div class="card-body">
           <h5 class="card-title">Science fiction</h5>
@@ -87,7 +91,7 @@
         <img
           src="{% static 'images/romance.webp' %}"
           class="card-img-top img-fluid"
-          alt="..."
+          alt="Romance genre"
         />
         <div class="card-body">
           <h5 class="card-title">Romance</h5>
@@ -105,7 +109,7 @@
         <img
           src="{% static 'images/thriller.webp' %}"
           class="card-img-top img-fluid"
-          alt="..."
+          alt="Thriller genre"
         />
         <div class="card-body">
           <h5 class="card-title">Thriller</h5>
