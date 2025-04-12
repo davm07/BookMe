@@ -4,7 +4,8 @@
   --card-color: #443627;
 }
 
-.genres-container {
+.genres-container,
+.user-buttons {
   max-width: 62rem;
 }
 
@@ -75,10 +76,10 @@
   border: var(--card-color) solid 2px;
 }
 
-.search-btn {
+.search-btn,
+.btn.btn-account {
   background-color: var(--card-color);
   color: var(--bg-color);
-  margin-top: 0.5rem;
 
   &:hover {
     background-color: transparent;
@@ -125,7 +126,10 @@ a.custom-link:hover {
   color: var(--fg-color);
   border: var(--card-color) solid 1px;
 }
-.btn-home {
+
+.btn-home,
+.form-btn,
+.btn-favorites {
   background-color: var(--card-color);
   color: var(--bg-color);
 
@@ -142,4 +146,96 @@ a.custom-link:hover {
   gap: 1rem;
   max-width: 800px !important;
   margin: 3rem 0 0 0;
+}
+
+.form-container {
+  max-width: fit-content;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border: 2px solid var(--card-color);
+  border-radius: 1rem;
+
+  div {
+    margin-bottom: 0.5rem;
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      color: var(--fg-color);
+      border-radius: 0.5rem;
+      border: 1px solid;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+  }
+
+  > * {
+    color: var(--fg-color);
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  .helptext {
+    font-size: smaller;
+  }
+
+  .form-btn {
+    width: 100%;
+  }
+
+  .errorlist {
+    list-style: none;
+    padding: 0;
+
+    li {
+      color: red;
+      font-weight: bold;
+      font-size: smaller;
+    }
+  }
+}
+
+.favorite-books {
+  display: flex;
+  max-width: 62rem;
+  flex-direction: row;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+
+  .favorite-book {
+    display: flex;
+    max-width: 20rem;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    height: fit-content;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(68, 54, 39, 1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(68, 54, 39, 1);
+    box-shadow: 0px 0px 10px 0px rgba(68, 54, 39, 1);
+
+    * {
+      color: var(--fg-color);
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .btn-favorites {
+      color: var(--bg-color);
+
+      &:hover {
+        color: var(--fg-color);
+      }
+    }
+  }
 }

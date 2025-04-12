@@ -3,9 +3,11 @@
 {% block title %} Register user {% endblock %}
 
 {% block content %}
-<h1>Register user</h1>
-<form action="{% url 'users:register_user' %}" method="post">
-  {% csrf_token %} {{ form }}
-  <button type="submit">Register</button>
-</form>
+<h1 class="custom-title">Register user</h1>
+<div class="form-container">
+  <form action="{% url 'users:register_user' %}" method="post" class="custom-form">
+    {% csrf_token %} {{ form }}
+    <button type="submit" class="btn form-btn">Register</button>
+  </form>
+</div>
 {% endblock %}

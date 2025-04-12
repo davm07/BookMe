@@ -1,8 +1,7 @@
 {% extends "base.html" %} {% block title %} - Results for: {{ title }}{%endblock%}
 {% block content %}
-<a href="/" class="btn btn-home mb-4">&larr; Back to Home</a>
+<div class="mt-4">
 <h1 class="custom-title">Results for: {{ title }}</h1>
-
 {% include 'partials/search_bar.html' %}
 {% if books|length > 0%}
 <div class="results-list">
@@ -113,4 +112,6 @@
 </div>
 {% else %}
 <p class="text-custom">No results found</p>
-{% endif %} {% endblock %}
+{% endif %}
+</div>
+{% endblock %}

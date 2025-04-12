@@ -1,4 +1,22 @@
-<div>
-  <a href="{% url 'users:register_user' %}" class="btn btn-outline-primary">Register</a>
-  <a href="{% url 'users:login_user' %}" class="btn btn-outline-primary">Login</a>
+<div class="d-flex flex-row-reverse gap-3 user-buttons align-items-center">
+  {% if user.is_authenticated%}
+    <form action="{% url 'users:logout_user' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-account">Logout</button>
+    </form>
+    {% if request.path != '/users/profile/' %}
+      <a href="{% url 'users:user_profile' %}" class="btn btn-account">Profile</a>
+    {% endif %}
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <p class="text-custom my-0">Welcome, <b>{{ user.username }}</b></p>
+    </div>
+
+  {% else %}
+    <a href="{% url 'users:login_user' %}" class="btn btn-account">Login</a>
+    <a href="{% url 'users:register_user' %}" class="btn btn-account">Register</a>
+  {% endif %}
+
+  {% if request.path != '/' %}
+    <a href="/" class="btn btn-home">&larr; Back to search home</a>
+  {% endif %}
 </div>

@@ -1,7 +1,10 @@
 import math
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .utils import fecth_books, get_book_details
 from urllib.parse import quote_plus
+from django.contrib.auth.decorators import login_required
+from .models import FavoriteBook
+from django.http import HttpResponseRedirect
 
 def books_search(request):
     return render(request, 'books_search.html')
@@ -36,5 +39,17 @@ def books_search_results(request):
     return render(request, 'results_list.html', context)
 
 def book_detail(request, book_id):
+    is_favorite = False
+    if request.user.is_authenticated:
+        is_favorite = FavoriteBook.objects.filter(user=request.user, book_id=book_id).exists()
     book = get_book_details(book_id)
-    return render(request, 'book_detail.html', {'book': book})
+    return render(request, 'book_detail.html', {'book': book, 'is_favorite': is_favorite})
+
+@login_required(login_url='/users/login/')
+def add_book_to_favorites(request, book_id):
+    if request.method == 'POST':
+        if not FavoriteBook.objects.filter(user=request.user, book_id=book_id).exists():
+            FavoriteBook.objects.create(user=request.user, book_id=book_id)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        return redirect('/')
